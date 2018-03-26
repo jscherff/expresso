@@ -13,20 +13,6 @@ const db = require('../store/db');
 // Helper Middleware.
 // =======================================================================
 
-// Extract ID from the path, verify that it is numeric, positive, and finite.
-menuItemsRouter.param('menuItemId', function(req, res, next, id, name) {
-  if(isNaN(parseFloat(id)) || !isFinite(id) || id < 0) {
-    res.status(400).end();
-  } else {
-    req.kvs.set('$' + name, id);
-    next();
-  }
-});
-
-// =======================================================================
-// Helper Middleware.
-// =======================================================================
-
 // Verify required object properties are present in the request body and
 // have valid values. If valid, seed key-value store object with objects
 // properties. If not valid, return HTTP 400 'Bad Request' status.
