@@ -9,9 +9,11 @@ const menusRouter = require('./menus');
 // Import the key-value store module
 const kvs = require('../store/kvs');
 
-// Create an empty KV-store object in the request object. This allows us to
-// accumulate named parameters for sqlite3 queries from the request object as
-// we encounter them.
+// Create an empty key-value store object in the request object. This allows
+// us to create and accumulate named parameters for sqlite3 queries from the
+// request object as we encounter them. We can then pass 'req.kvs.entries()'
+// as the second argument to sqlite3 queries rather than construct the named
+// parameters object at the time of the query.
 apiRouter.use(function(req, res, next) {
   req.kvs = new kvs();
   next();
